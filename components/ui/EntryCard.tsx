@@ -1,15 +1,19 @@
 import { DragEvent, useContext } from 'react';
+import { useRouter } from 'next/router';
 
 import { Card, CardActionArea, CardActions, Typography } from '@mui/material';
 
 import { Entry } from '../../interfaces';
 import { UIContext } from '../../context/ui';
+import { dateFunctions } from '../../utils'
 
 interface Props {
     entry: Entry;
 }
 
 export const EntryCard = ({ entry }: Props) => {
+
+    const router = useRouter();
 
     const { startDragging, endDragging } = useContext(UIContext)
 
@@ -22,8 +26,13 @@ export const EntryCard = ({ entry }: Props) => {
         endDragging();
     }
 
+    const redirectEditPage = () => {
+        router.push(`/entries/${entry._id}`)
+    }
+
     return (
         <Card
+            onClick={redirectEditPage}
             sx={{ marginBottom: 1 }}
             draggable
             onDragStart={onDragStart}
@@ -36,7 +45,7 @@ export const EntryCard = ({ entry }: Props) => {
 
                 <CardActions sx={{ display: 'flex', justifyContent: 'end', paddingRight: 2 }}>
                     <Typography variant='body2' >
-                        Hace 20 minutos
+                        {dateFunctions.getFormatDistanceToNow(entry.createdAt)}
                     </Typography>
                 </CardActions>
 
