@@ -28,9 +28,9 @@ export const NewEntry = () => {
     }
 
     const cancel = () => {
-        setInputValue("");
         setIsAddingEntry(false);
         setTouched(false); 
+        setInputValue("");
     }
 
     return (

@@ -11,7 +11,6 @@ interface Props {
 
 export const EntryCard = ({ entry }: Props) => {
 
-
     const { startDragging, endDragging } = useContext(UIContext)
 
     const onDragStart = (event: DragEvent) => {
